@@ -1,0 +1,55 @@
+Problem Statement:
+Given an array of non-negative integers arr, you are initially positioned at start index of the array. When you are at index i, you can jump to i + arr[i] or i - arr[i], check if you can reach any index with value 0.
+Notice that you can not jump outside of the array at any time.
+Example 1:
+Input: arr = [4,2,3,0,3,1,2], start = 5
+Output: true
+Explanation: 
+All possible ways to reach at index 3 with value 0 are: 
+index 5 -> index 4 -> index 1 -> index 3 
+index 5 -> index 6 -> index 4 -> index 1 -> index 3
+
+Solution:
+class Solution {
+    public boolean canReach(int[] arr, int start) {
+        int n=arr.length;
+        Queue<Integer> queue=new LinkedList<>();
+        boolean visited[]=new boolean[n];
+        queue.add(start);
+        visited[start]=true;
+
+        while(!queue.isEmpty()){
+            int index=queue.poll();
+
+            if(arr[index]==0) return true;
+
+            int back=index-arr[index];
+            int forward=index+arr[index];
+            if(forward<n && !visited[forward]){
+                queue.add(forward);
+                visited[forward]=true;
+            }
+            if(back>=0 && !visited[back]){
+                queue.add(back);
+                visited[back]=true;
+            }
+
+        }
+        return false;
+    }
+}
+
+Explanation:
+Initialize Data Structures:
+  Queue<Integer> queue = new LinkedList<>(); → Used for BFS traversal.
+  boolean[] visited = new boolean[n]; → Marks visited indices to avoid cycles.
+  Add start index to the queue and mark it as visited.
+BFS Traversal:
+  While the queue is not empty:
+  Dequeue an index (poll()).
+  Check if arr[index] == 0 → If yes, return true.
+Calculate possible next jumps:
+  forward = index + arr[index]
+  backward = index - arr[index]
+  Enqueue unvisited valid indices (i.e., within bounds and not visited).
+If queue is exhausted and 0 is not found, return false.
