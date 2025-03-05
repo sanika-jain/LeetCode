@@ -1,4 +1,4 @@
-Problem Statement:
+/*Problem Statement:
 You are given a 0-indexed array of integers nums of length n. You are initially positioned at nums[0].
 Each element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at nums[i], you can jump to any nums[i + j] where:0 <= j <= nums[i] and i + j < n
 Return the minimum number of jumps to reach nums[n - 1]. The test cases are generated such that you can reach nums[n - 1].
@@ -9,9 +9,9 @@ Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 st
 Constraints:
 1 <= nums.length <= 10^4
 0 <= nums[i] <= 1000
-It's guaranteed that you can reach nums[n - 1].
+It's guaranteed that you can reach nums[n - 1].*/
 
-Solution:
+//Solution:
 class Solution {
     public int jump(int[] nums) {
         int n = nums.length;
@@ -34,7 +34,7 @@ class Solution {
     }
 }
 
-Explanation:
+/*Explanation:
 Edge case: If nums.length == 1, return 0 (already at last index).
 Initialize variables:
   jumps = 0 → Tracks the number of jumps.
@@ -44,7 +44,7 @@ Iterate through the array (except the last index):
   Update maxReach with the farthest index that can be reached.
   If i == currentEnd (we've used all steps in the current jump):
   Increment jumps.
-  Update currentEnd to maxReach.
+  Update currentEnd to maxReach.*/
 If currentEnd >= n - 1, break (last index is reachable).
 Return total jumps needed.
 
